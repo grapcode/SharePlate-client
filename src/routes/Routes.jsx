@@ -4,6 +4,10 @@ import MainLayout from '../layout/MainLayout';
 import AvailableFoods from '../pages/AvailableFoods';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import AddFood from '../pages/private_page/AddFood';
+import PrivateRoute from '../privateRoute/PrivateRoute';
+import ManageFoods from '../pages/private_page/ManageFoods';
+import MyRequests from '../pages/private_page/MyRequests';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +29,39 @@ export const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+      // private page
+      {
+        path: '/addFood',
+        element: (
+          <PrivateRoute>
+            <AddFood />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/manageFoods',
+        element: (
+          <PrivateRoute>
+            <ManageFoods />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/manageFoods',
+        element: (
+          <PrivateRoute>
+            <ManageFoods />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/myRequests',
+        element: (
+          <PrivateRoute>
+            <MyRequests />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/*',

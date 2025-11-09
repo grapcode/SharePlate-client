@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
+  // 🔰 get authProvider Func
+  const {
+    createUserWithEmailAndPasswordFunc,
+    setUser,
+    // updateProfileFunc,
+    // sendEmailVerificationFunc,
+    // setLoading,
+    // signoutUserFunc,
+  } = useContext(AuthContext);
+
+  // 🔰 After successful signup, navigate to login page
+  const navigate = useNavigate();
+
   // ⚡ show password
   const [show, setShow] = useState(false);
 
@@ -14,6 +29,18 @@ const SignUp = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(displayName, photoURL, email, password);
+
+    // ⚡1st: signup with email
+    createUserWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        const user = res.user;
+        toast.success('Account created successfully!', user);
+        setUser(null);
+        navigate('/login');
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
   };
   return (
     <div>

@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import splogo from '../assets/shareP-logo.png';
 import MyContainer from './my-components/MyContainer';
 import { IoReorderThreeOutline } from 'react-icons/io5';
+import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
+import { FadeLoader } from 'react-spinners';
 
 const Navbar = () => {
+  // 🔰 get user from authProvider
+  const { user, setUser, signoutUserFunc, loading } = useContext(AuthContext);
+  console.log(user);
+
+  // ⚡ handle sign out btn
+  const handleSignout = () => {
+    // signOut(auth)
+    signoutUserFunc()
+      .then(() => {
+        toast.success('Signout success!');
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -47,31 +67,54 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
 
+          {/* 💥 user condition 💥 */}
           <div className="navbar-end">
-            {/* dropdown */}
-            {/* <div className="dropdown">
-              <div tabIndex={0} role="button" className="btn m-1">
-                <img
-                  className="w-12 rounded-full border border-secondary p-1"
-                  src="https://i.ibb.co.com/wFZ5C2D7/photo-1581184953987-5668072c8420.jpg"
-                  alt=""
-                />
+            {/* dropdown start*/}
+            {loading ? (
+              <FadeLoader />
+            ) : user ? (
+              <div className="dropdown relative text-center p-1">
+                <button tabIndex={0} role="button" className="cursor-pointer">
+                  <img
+                    className="md:size-15 size-12 rounded-full"
+                    src={
+                      user?.photoURL ||
+                      'https://img.icons8.com/?size=80&id=108652&format=png'
+                    }
+                    alt=""
+                    title={user?.displayName}
+                  />
+                </button>
+
+                {/* under div is dropdown */}
+
+                <div
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm absolute top-16 md:-left-18 -left-38"
+                >
+                  <li>
+                    <Link to="/addFood">Add Food</Link>
+                  </li>
+                  <li>
+                    <Link to="/manageFoods">Manage Foods</Link>
+                  </li>
+                  <li>
+                    <Link to="/myRequests">My Requests</Link>
+                  </li>
+
+                  <button
+                    onClick={handleSignout}
+                    className="btn btn-primary border-0 "
+                  >
+                    Sign Out
+                  </button>
+                </div>
               </div>
-              <ul
-                tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-              >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Item 2</a>
-                </li>
-              </ul>
-            </div> */}
-            <Link to="/login" className="btn btn-primary">
-              Login
-            </Link>
+            ) : (
+              <Link to="/login" className="btn btn-primary">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </MyContainer>

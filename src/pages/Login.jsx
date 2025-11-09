@@ -1,18 +1,64 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+  // 🔰 get authProvider Func
+  const {
+    signInWithEmailAndPasswordFunc,
+    signInWithGoogleFunc,
+    user,
+    setUser,
+    setLoading,
+  } = useContext(AuthContext);
+
+  // 🔰 After successful signin, navigate to card id
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
   // ⚡ show password
   const [show, setShow] = useState(false);
 
   // 🎯  Forgot password
   const emailRef = useRef(null);
 
+  // ♻️ user signin thakle -- signin dekhabe na
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true }); // লগইন থাকলে আগের পেজে পাঠাও
+    }
+  }, [user, navigate, from]);
+
   // ⚡ handle signin/login from
   const handleLogin = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+
+    // ⚡ signin with email func
+    signInWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        setLoading(false);
+        // 🍁 form signup 3rd: sendEmailVerification condition
+        // if (!res.user.emailVerified) {
+        //   toast.error('Your email is not verified.');
+        //   setUser(null);
+        //   return;
+        // }
+        const user = res.user;
+        toast.success('Sign up was successful.');
+        setUser(user);
+        navigate('/');
+      })
+      .catch((e) => {
+        setLoading(false);
+        toast.error(e.message);
+      });
   };
 
   // 🎯 handle Forgot password
@@ -20,7 +66,20 @@ const Login = () => {
 
   //   💥 google signin
 
-  const handleGoogleSignin = () => {};
+  const handleGoogleSignin = () => {
+    setLoading(true);
+    signInWithGoogleFunc()
+      .then((res) => {
+        setLoading(false);
+        toast.success('google signin successful');
+        setUser(res.user);
+        navigate('/');
+      })
+      .catch((e) => {
+        setLoading(false);
+        toast.error(e.message);
+      });
+  };
 
   return (
     <div>
