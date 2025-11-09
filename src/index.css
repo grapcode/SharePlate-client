@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+* {
+    font-family: "Lora", serif;
+    letter-spacing: 0.025em;
+}
+
+/* customize theme */
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: #76adb6;
+    --color-secondary: #f96464;
+    --color-accent: #f8c460;
+    --color-base-200: #ebf8fb;
+}
+
+/* navbar active  */
+.navbar .active {
+    color: #f96464;
+    font-weight: bold;
+    border: 1px solid;
+    border-radius: 20px;
+}
