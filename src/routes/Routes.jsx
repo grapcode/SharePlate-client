@@ -21,6 +21,7 @@ export const router = createBrowserRouter([
       {
         path: '/availableFoods',
         element: <AvailableFoods />,
+        loader: () => fetch('http://localhost:3000/availableFoods'),
       },
       {
         path: '/login',
