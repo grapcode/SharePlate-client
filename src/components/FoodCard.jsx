@@ -1,75 +1,74 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../context/AuthContext'; // 🔹 তোমার Context path অনুযায়ী ঠিক করে নিও
 
 const FoodCard = ({ food }) => {
   const {
-    food_name,
-    food_image,
-    food_quantity,
-    pickup_location,
-    expire_date,
-    additional_notes,
-    donator_name,
-    donator_email,
-    donator_image,
-    food_status,
+    _id,
+    foodName,
+    foodImage,
+    foodQuantity,
+    pickupLocation,
+    expireDate,
+    donatorName,
+    donatorImage,
   } = food;
 
+  const { user } = useContext(AuthContext); // 🔐 logged in user check
+  const navigate = useNavigate();
+
+  // 📦 Handle View Details Button
+  const handleViewDetails = () => {
+    if (!user) {
+      navigate('/login'); // 🔁 যদি লগইন না করা থাকে, Login পেইজে পাঠাও
+    } else {
+      navigate(`/foods/${_id}`); // ✅ logged in হলে ডিটেইলস পেইজে পাঠাও
+    }
+  };
+
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      {/* 🖼️ Food Image */}
-      <img
-        src={food_image}
-        alt={food_name}
-        className="w-full h-48 object-cover"
-      />
+    <div className="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 border rounded-2xl">
+      {/* Food Image */}
+      <figure className="px-5 pt-5">
+        <img
+          src={foodImage}
+          alt={foodName}
+          className="rounded-xl h-48 w-full object-cover"
+        />
+      </figure>
 
-      {/* 📄 Food Info */}
-      <div className="p-5 space-y-3">
-        <h2 className="text-xl font-semibold text-gray-800">{food_name}</h2>
-        <p className="text-sm text-gray-600">{food_quantity}</p>
+      {/*  Card Body */}
+      <div className="card-body items-center text-center">
+        <h2 className="card-title text-lg font-semibold text-gray-800">
+          {foodName}
+        </h2>
 
-        <div className="flex items-center gap-2 text-gray-700 text-sm">
-          <span className="font-medium">📍 Location:</span>
-          <span>{pickup_location}</span>
-        </div>
-
-        <div className="flex items-center gap-2 text-gray-700 text-sm">
-          <span className="font-medium">⏰ Expire:</span>
-          <span>{expire_date}</span>
-        </div>
-
-        <p className="text-gray-600 text-sm italic border-l-4 border-blue-400 pl-3">
-          {additional_notes}
-        </p>
-
-        {/* 🧑 Donator Info */}
-        <div className="flex items-center gap-3 mt-4">
+        {/*  Donator Info */}
+        <div className="flex items-center gap-2 mt-2">
           <img
-            src={donator_image}
-            alt={donator_name}
-            className="w-10 h-10 rounded-full object-cover border"
+            src={donatorImage}
+            alt={donatorName}
+            className="w-8 h-8 rounded-full border"
           />
-          <div>
-            <p className="font-medium text-gray-800">{donator_name}</p>
-            <p className="text-xs text-gray-500">{donator_email}</p>
-          </div>
+          <p className="text-sm font-medium text-gray-700">{donatorName}</p>
         </div>
 
-        {/* 🔘 Food Status */}
-        <div className="flex justify-between items-center mt-5">
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              food_status === 'Available'
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-600'
-            }`}
-          >
-            {food_status}
-          </span>
+        {/*  Other Info */}
+        <div className="mt-3 space-y-1 text-sm text-gray-600">
+          <p>🍽️ Quantity: {foodQuantity}</p>
+          <p>📍 {pickupLocation}</p>
+          <p>⏰ Expire: {expireDate}</p>
+        </div>
 
-          <button className="bg-primary text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-accent cursor-pointer transition">
+        {/*  Button */}
+        <div className="card-actions mt-4">
+          <Link
+            to={`/foodDetails/${_id}`}
+            onClick={handleViewDetails}
+            className="btn btn-primary btn-sm px-5 rounded-lg"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
