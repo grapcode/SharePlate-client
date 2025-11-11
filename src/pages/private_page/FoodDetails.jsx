@@ -1,10 +1,23 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import MyLoading from '../../components/my-components/MyLoading';
 
 const FoodDetails = () => {
-  const food = useLoaderData();
+  // const food = useLoaderData();
+  const { id } = useParams();
 
-  console.log(food);
+  const [food, setFood] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/foods/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setFood(data);
+        setLoading(false);
+      });
+  }, [id]);
 
   const {
     foodName,
@@ -18,6 +31,9 @@ const FoodDetails = () => {
     foodStatus,
   } = food;
 
+  if (loading) {
+    return <MyLoading />;
+  }
   return (
     <div className="max-w-3xl mx-auto my-10 p-6 bg-base-100 rounded-2xl shadow-lg border">
       {/* Food Image */}

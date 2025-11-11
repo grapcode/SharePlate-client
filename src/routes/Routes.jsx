@@ -9,6 +9,7 @@ import PrivateRoute from '../privateRoute/PrivateRoute';
 import ManageFoods from '../pages/private_page/ManageFoods';
 import MyRequests from '../pages/private_page/MyRequests';
 import FoodDetails from '../pages/private_page/FoodDetails';
+import NotFound from '../pages/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: () => fetch('http://localhost:3000/latest-foods'),
       },
       {
         path: '/availableFoods',
@@ -48,8 +50,8 @@ export const router = createBrowserRouter([
             <FoodDetails />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/foods/${params.id}`),
+        // loader: ({ params }) =>
+        //   fetch(`http://localhost:3000/foods/${params.id}`),
       },
       {
         path: '/manageFoods',
@@ -75,9 +77,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Not found route
       {
-        path: '/*',
-        element: <h2>Error 404</h2>,
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },
