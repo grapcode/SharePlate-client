@@ -3,12 +3,25 @@ import MyContainer from './my-components/MyContainer';
 import { FaFacebook, FaInstagram, FaLinkedin, FaPhone } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import { FaXTwitter } from 'react-icons/fa6';
+import splogo from '../assets/shareP-logo.png';
 
 const Footer = () => {
   return (
-    <div className="bg-base-300">
+    <div className="bg-secondary text-white">
       <MyContainer>
         <footer className=" grid md:grid-cols-3  md:justify-items space-x-15 py-10 p-3 gap-5 ">
+          <nav>
+            <h6 className="footer-title">Company info</h6>
+            <div className="flex items-center gap-3 mb-2">
+              <img className="w-10" src={splogo} alt="" />
+              <p className="text-lg">SharePlate Ltd.</p>
+            </div>
+
+            <p className="text-sm ">
+              SharePlate — a platform for sharing surplus food.
+            </p>
+          </nav>
+
           <nav>
             <h6 className="footer-title">Contact Info</h6>
             <div className="text-[14px]">
@@ -21,14 +34,7 @@ const Footer = () => {
               </p>
             </div>
           </nav>
-          <nav>
-            <h6 className="footer-title">privacy policy</h6>
-            <p className="text-[14px]">
-              At SharePlate, we value your privacy. This Privacy Policy outlines
-              how we collect, use, and protect your personal information to
-              ensure a safe and trusted experience on our website and services.
-            </p>
-          </nav>
+
           <nav>
             <h6 className="footer-title">Social Links</h6>
             <section className="flex gap-12  text-[14px] ">
@@ -51,6 +57,9 @@ const Footer = () => {
             </section>
           </nav>
         </footer>
+        <p className="text-[12px] text-center my-5">
+          © 2025 SharePlate. All rights reserved.
+        </p>
       </MyContainer>
     </div>
   );

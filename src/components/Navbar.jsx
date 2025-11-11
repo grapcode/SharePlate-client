@@ -96,7 +96,7 @@ const Navbar = () => {
                     <Link to="/addFood">Add Food</Link>
                   </li>
                   <li>
-                    <Link to="/manageFoods">Manage Foods</Link>
+                    <Link to="/manageFoods">Manage My Foods</Link>
                   </li>
                   <li>
                     <Link to="/myRequests">My Requests</Link>

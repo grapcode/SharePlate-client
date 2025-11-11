@@ -21,6 +21,7 @@ const FoodDetails = () => {
 
   const {
     foodName,
+    foodImage,
     foodQuantity,
     pickupLocation,
     expireDate,
@@ -34,11 +35,12 @@ const FoodDetails = () => {
   if (loading) {
     return <MyLoading />;
   }
+
   return (
     <div className="max-w-3xl mx-auto my-10 p-6 bg-base-100 rounded-2xl shadow-lg border">
       {/* Food Image */}
       <img
-        src={food.foodImage}
+        src={foodImage}
         alt={foodName}
         className="w-full h-64 object-cover rounded-xl"
       />

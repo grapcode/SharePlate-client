@@ -1,16 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 // BannerHero.jsx
 // React + TailwindCSS + daisyUI
 // Default export a reusable Banner / Hero component for the Home Page.
+const title = 'Share & Find Free Food in Your Community';
+const subtitle =
+  'Reduce waste. Help neighbors. Collect food near you — fast and simple.';
+const imageUrl =
+  'https://i.ibb.co.com/nqPPZ7DC/photo-1727003826885-4512f0a8388a.jpg';
 
-const Banner = ({
-  title = 'Share & Find Free Food in Your Community',
-  subtitle = 'Reduce waste. Help neighbors. Collect food near you — fast and simple.',
-  imageUrl = 'https://images.unsplash.com/photo-1727003826885-4512f0a8388a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1331',
-  onSearch = () => {},
-  onViewAll = () => {},
-}) => {
+const Banner = () => {
   return (
     <header className="relative w-full">
       {/* Background image + dark overlay */}
@@ -32,21 +32,13 @@ const Banner = ({
 
               {/* CTA Buttons */}
               <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <button
-                  onClick={onSearch}
-                  className="btn btn-primary btn-lg shadow-lg"
-                  aria-label="Search Food"
-                >
-                  Search Food
-                </button>
-
-                <button
-                  onClick={onViewAll}
-                  className="btn btn-outline btn-lg text-white border-white/60 hover:border-white"
+                <Link
+                  to="/availableFoods"
+                  className="btn btn-primary btn-lg text-white  hover:border-accent"
                   aria-label="View All Foods"
                 >
                   View All Foods
-                </button>
+                </Link>
               </div>
 
               {/* Small helper / trust badges */}
