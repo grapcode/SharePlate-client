@@ -6,6 +6,11 @@ import { IoReorderThreeOutline } from 'react-icons/io5';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { FadeLoader } from 'react-spinners';
+import { GoHomeFill } from 'react-icons/go';
+import { SiFoodpanda } from 'react-icons/si';
+import { CgExtensionAdd } from 'react-icons/cg';
+import { MdManageAccounts } from 'react-icons/md';
+import { IoMdGitPullRequest } from 'react-icons/io';
 
 const Navbar = () => {
   // 🔰 get user from authProvider
@@ -28,10 +33,14 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">
+          <GoHomeFill /> Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/availableFoods">Available Foods</NavLink>
+        <NavLink to="/availableFoods">
+          <SiFoodpanda /> Available Foods
+        </NavLink>
       </li>
     </>
   );
@@ -73,7 +82,7 @@ const Navbar = () => {
             {loading ? (
               <FadeLoader />
             ) : user ? (
-              <div className="dropdown relative text-center p-1">
+              <div className="dropdown dropdown-end z-50">
                 <button tabIndex={0} role="button" className="cursor-pointer">
                   <img
                     className="md:size-15 size-12 rounded-full"
@@ -90,21 +99,31 @@ const Navbar = () => {
 
                 <div
                   tabIndex="-1"
-                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm absolute top-16 md:-left-18 -left-38"
+                  className="dropdown-content menu menu-sm bg-base-100 rounded-box w-52  p-2 shadow-sm "
                 >
-                  <li>
-                    <Link to="/addFood">Add Food</Link>
+                  <div className=" pb-3 border-b border-b-gray-200">
+                    <li className="text-sm font-bold">{user.displayName}</li>
+                    <li className="text-xs">{user.email}</li>
+                  </div>
+                  <li className="mt-2">
+                    <NavLink to="/addFood">
+                      <CgExtensionAdd /> Add Food
+                    </NavLink>
                   </li>
                   <li>
-                    <Link to="/manageFoods">Manage My Foods</Link>
+                    <NavLink to="/manageFoods">
+                      <MdManageAccounts /> Manage My Foods
+                    </NavLink>
                   </li>
                   <li>
-                    <Link to="/myRequests">My Requests</Link>
+                    <NavLink to="/myRequests">
+                      <IoMdGitPullRequest /> My Requests
+                    </NavLink>
                   </li>
 
                   <button
                     onClick={handleSignout}
-                    className="btn btn-primary border-0 "
+                    className="btn btn-primary border-0 mt-2 "
                   >
                     Sign Out
                   </button>
