@@ -30,6 +30,16 @@ const SignUp = () => {
     const password = e.target.password.value;
     console.log(displayName, photoURL, email, password);
 
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.'
+      );
+      return;
+    }
+
     // ⚡1st: signup with email
     createUserWithEmailAndPasswordFunc(email, password)
       .then((res) => {
@@ -40,6 +50,11 @@ const SignUp = () => {
       })
       .catch((e) => {
         console.log(e.message);
+        if (e.code == 'auth/email-already-in-use') {
+          toast.error('User already exist in database');
+        } else {
+          toast.error(e.message);
+        }
       });
   };
   return (
