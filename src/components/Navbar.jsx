@@ -66,9 +66,9 @@ const Navbar = () => {
             </div>
             {/* logo */}
             <div className="flex gap-3 justify-center items-center ">
-              <img className="w-10" src={splogo} alt="" />
+              <img className="w-10 md:ml-0 ml-3" src={splogo} alt="" />
               <Link to="/" className="text-2xl font-bold text-primary">
-                SharePlate
+                Share<span className=" text-accent">Plate</span>
               </Link>
             </div>
           </div>

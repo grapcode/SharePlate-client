@@ -7,14 +7,16 @@ import splogo from '../assets/shareP-logo.png';
 
 const Footer = () => {
   return (
-    <div className="bg-secondary text-white">
+    <div className="bg-info-content text-white">
       <MyContainer>
-        <footer className=" grid md:grid-cols-3  md:justify-items space-x-15 py-10 p-3 gap-5 ">
+        <footer className=" grid md:grid-cols-3 md:justify-items space-x-15 py-10 p-3 gap-5 ">
           <nav>
             <h6 className="footer-title">Company info</h6>
             <div className="flex items-center gap-3 mb-2">
               <img className="w-10" src={splogo} alt="" />
-              <p className="text-lg">SharePlate Ltd.</p>
+              <p className="text-lg">
+                Share<span className="text-accent">Plate</span> Ltd.
+              </p>
             </div>
 
             <p className="text-sm ">

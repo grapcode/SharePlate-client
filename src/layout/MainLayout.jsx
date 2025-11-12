@@ -6,7 +6,7 @@ import MyContainer from '../components/my-components/MyContainer';
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-50 ">
       <Navbar />
       <MyContainer className={'flex-1'}>
         <Outlet />

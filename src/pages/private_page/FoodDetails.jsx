@@ -127,7 +127,9 @@ const FoodDetails = () => {
             className="modal modal-bottom sm:modal-middle"
           >
             <form onSubmit={handleRequest} className="modal-box">
-              <h3 className="font-bold text-lg">Request This Food</h3>
+              <h3 className="font-bold text-lg">
+                Request This <span className="bg-accent">Food</span>
+              </h3>
               <p className="py-2">Fill the form to request this food.</p>
 
               {/* Location */}
