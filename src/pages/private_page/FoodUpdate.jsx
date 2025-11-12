@@ -20,7 +20,7 @@ const FoodUpdate = () => {
   } = food;
 
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`)
+    fetch(`https://share-plate-server-xi.vercel.app/foods/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -56,7 +56,7 @@ const FoodUpdate = () => {
       addedAt: new Date(),
     };
 
-    fetch(`http://localhost:3000/foodUpdate/${food._id}`, {
+    fetch(`https://share-plate-server-xi.vercel.app/foodUpdate/${food._id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',

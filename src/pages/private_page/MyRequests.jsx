@@ -11,7 +11,9 @@ const MyRequests = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-requests?email=${user.email}`)
+    fetch(
+      `https://share-plate-server-xi.vercel.app/my-requests?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

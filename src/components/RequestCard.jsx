@@ -24,15 +24,21 @@ const RequestCard = ({ food, refetch }) => {
         body: JSON.stringify(data),
       });
 
-    const reqRes = await update(`http://localhost:3000/requests/${_id}`, {
-      status: newStatus,
-    });
+    const reqRes = await update(
+      `https://share-plate-server-xi.vercel.app/requests/${_id}`,
+      {
+        status: newStatus,
+      }
+    );
     if (!reqRes.ok) return toast.error('Failed to update request');
 
     if (newStatus === 'accepted') {
-      const foodRes = await update(`http://localhost:3000/foods/${foodId}`, {
-        status: 'donated',
-      });
+      const foodRes = await update(
+        `https://share-plate-server-xi.vercel.app/foods/${foodId}`,
+        {
+          status: 'donated',
+        }
+      );
       if (!foodRes.ok) return toast.error('Failed to update food');
     }
 

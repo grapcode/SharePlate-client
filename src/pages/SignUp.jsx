@@ -50,11 +50,6 @@ const SignUp = () => {
       })
       .catch((e) => {
         console.log(e.message);
-        if (e.code == 'auth/email-already-in-use') {
-          toast.error('User already exist in database');
-        } else {
-          toast.error(e.message);
-        }
       });
   };
   return (

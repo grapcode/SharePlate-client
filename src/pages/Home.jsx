@@ -6,6 +6,7 @@ import HomeSections from '../components/HomeSection';
 
 const Home = () => {
   const foodData = useLoaderData();
+  // console.log(foodData);
   return (
     <div className="mx-3">
       <Banner />

@@ -12,7 +12,7 @@ const FoodDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/foods/${id}`)
+    fetch(`https://share-plate-server-xi.vercel.app/foods/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setFood(data);
@@ -52,7 +52,7 @@ const FoodDetails = () => {
       status: 'pending',
     };
 
-    fetch('http://localhost:3000/requests', {
+    fetch('https://share-plate-server-xi.vercel.app/requests', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newRequest),

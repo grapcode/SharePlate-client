@@ -20,12 +20,13 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: () => fetch('http://localhost:3000/latest-foods'),
+        loader: () =>
+          fetch('https://share-plate-server-xi.vercel.app/latest-foods'),
       },
       {
         path: '/availableFoods',
         element: <AvailableFoods />,
-        loader: () => fetch('http://localhost:3000/foods'),
+        loader: () => fetch('https://share-plate-server-xi.vercel.app/foods'),
       },
       {
         path: '/login',

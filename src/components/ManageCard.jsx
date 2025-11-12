@@ -30,7 +30,7 @@ const ManageCard = ({ food }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // api call
-        fetch(`http://localhost:3000/foods/${_id}`, {
+        fetch(`https://share-plate-server-xi.vercel.app/foods/${_id}`, {
           method: 'DELETE',
           headers: {
             'content-type': 'application/json',
