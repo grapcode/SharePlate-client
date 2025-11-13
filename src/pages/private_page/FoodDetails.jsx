@@ -12,14 +12,19 @@ const FoodDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://share-plate-server-xi.vercel.app/foods/${id}`)
+    fetch(`https://share-plate-server-xi.vercel.app/foods/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data);
         setFood(data);
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [id, user]);
 
   const {
     foodName,

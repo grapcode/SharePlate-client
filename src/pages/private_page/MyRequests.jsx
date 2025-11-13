@@ -12,7 +12,12 @@ const MyRequests = () => {
 
   useEffect(() => {
     fetch(
-      `https://share-plate-server-xi.vercel.app/my-requests?email=${user.email}`
+      `https://share-plate-server-xi.vercel.app/my-requests?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {

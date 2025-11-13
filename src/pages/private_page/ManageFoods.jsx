@@ -11,7 +11,12 @@ const ManageFoods = () => {
 
   useEffect(() => {
     fetch(
-      `https://share-plate-server-xi.vercel.app/manageFoods?email=${user.email}`
+      `https://share-plate-server-xi.vercel.app/manageFoods?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
