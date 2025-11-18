@@ -26,10 +26,10 @@ const Login = () => {
   // 🎯  Forgot password
   const emailRef = useRef(null);
 
-  // ♻️ user signin thakle -- signin dekhabe na
+  // ♻️ user login thakle -- login page dukte dibe na
   useEffect(() => {
     if (user) {
-      navigate(from, { replace: true }); // লগইন থাকলে আগের পেজে পাঠাও
+      navigate(from, { replace: true }); // ✔ তাকে আগের পেজে (from) redirect  করে দিবে
     }
   }, [user, navigate, from]);
 
